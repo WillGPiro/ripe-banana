@@ -30,7 +30,7 @@ describe('studio routes', () => {
       });
   });
 
-  it('gets an studio by id', async() => {
+  it('gets a studio by id', async() => {
     const studio = await getStudio();
     return request(app)
       .get(`/api/v1/studios/${studio._id}`)
@@ -41,9 +41,16 @@ describe('studio routes', () => {
       }); 
   });
 
+  it('gets all studios', async() => {
+    const studios = await getStudios();
 
+    return request(app)
+      .get('/api/v1/studios/')
+      .then(res => {
+        expect(res.body).toEqual(studios);
+      });
+  });
 
-  
 });
 
 

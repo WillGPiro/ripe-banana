@@ -13,9 +13,9 @@ module.exports = async({ studiosToCreate } = {}) => {
   await Studio.create([...Array(studiosToCreate)].map(() => ({
     name: chance.pickone(name),
     address: {
-      city: chance.sentence(),
-      state: chance.sentence(),
-      country: chance.sentence()
+      city: chance.city(),
+      state: chance.state(),
+      country: chance.country()
     }
   })));
 };
