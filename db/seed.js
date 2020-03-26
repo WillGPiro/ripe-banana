@@ -1,9 +1,10 @@
 const Studio = require('../lib/models/Studio');
 const chance = require('chance').Chance();
+const Actor = require('../lib/models/Actor');
 
 // specifying the number of things to create with our seed function
 
-module.exports = async({ studiosToCreate } = {}) => {
+module.exports = async({ studiosToCreate, actorToCreate } = {}) => {
   // creating  things
   // creating an array of things length
   // map through the array
@@ -18,4 +19,13 @@ module.exports = async({ studiosToCreate } = {}) => {
       country: chance.country()
     }
   })));
+  
+  await Actor.create([...Array(actorToCreate)].map(() => ({
+    name: chance.name(),
+    dob: chance.birthday({ string: true }),
+    pob: chance.city()
+  })));
+
 };
+
+

@@ -4,7 +4,7 @@ const request = require('supertest');
 const app = require('../lib/app');
 
 describe('actor routes', () => {
-  it('creates a actor', async() => {
+  it('creates an actor', async() => {
     return request(app)
       .post('/api/v1/actors')
       .send({
@@ -19,6 +19,21 @@ describe('actor routes', () => {
           dob: '3-25-87',
           pob: 'Rome, Italy',
           __v: 0
+        });
+      });
+  });
+
+  it('gets all actors', async() => {
+    const actors = await getActors();
+
+    return request(app)
+      .get('/api/v1/actors')
+      .then(res => {
+        actors.forEach(actor => {
+          delete actor.__v;
+          delete actor.dob;
+          delete actor.pob;
+          expect(res.body).toContainEqual(actor);
         });
       });
   });
