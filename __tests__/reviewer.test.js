@@ -16,6 +16,7 @@ describe('reviewer routes', () => {
           _id: expect.any(String),
           name: 'Roger Siskal',
           company: 'Washington Movie Host',
+          id: expect.any(String),
           __v: 0
         });
       });
@@ -41,6 +42,7 @@ describe('reviewer routes', () => {
           _id: expect.any(String),
           name: 'Ebert Ernie',
           company: 'Oregon Movie Central',
+          id: expect.any(String),
           __v:0
         });
       });
