@@ -3,10 +3,11 @@ const chance = require('chance').Chance();
 const Actor = require('../lib/models/Actor');
 const Reviewer = require('../lib/models/Reviewer');
 const Film = require('../lib/models/Film');
+const Review = require('../lib/models/Review');
 
 // specifying the number of things to create with our seed function
 
-module.exports = async({ studiosToCreate, actorToCreate, reviewerToCreate, filmToCreate } = {}) => {
+module.exports = async({ studiosToCreate, actorToCreate, reviewerToCreate, filmToCreate, reviewToCreate } = {}) => {
   // creating  things
   // creating an array of things length
   // map through the array
@@ -29,19 +30,26 @@ module.exports = async({ studiosToCreate, actorToCreate, reviewerToCreate, filmT
     pob: chance.city()
   })));
 
-  await Reviewer.create([...Array(reviewerToCreate)].map(() => ({
+  const reviewer = await Reviewer.create([...Array(reviewerToCreate)].map(() => ({
     name: chance.name(),
     company: chance.name()
   })));
 
   const year = [1998, 2001, 1987, 1951, 2015, 2016];
-  await Film.create([...Array(filmToCreate)]
+  const film = await Film.create([...Array(filmToCreate)]
     .map(() => ({
       title: chance.animal({ type: 'ocean' } + 'IV'),
       studioId: chance.pickone(studio)._id,
       released: chance.pickone(year),
       cast: [...Array(10)].map(() => ({ role: chance.name({ prefix: true }), actorId: chance.pickone(actor)._id }))    
     })));
+
+  await Review.create([...Array(reviewToCreate)].map(() => ({
+    rating: chance.integer({ min: 1, max: 5 }),
+    reviewerId: chance.pickone(reviewer)._id,
+    review: chance.sentence({ words: 4 }),
+    filmId: chance.pickone(film)._id
+  })));
 
 };
 

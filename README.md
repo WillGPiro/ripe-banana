@@ -24,7 +24,7 @@ don't need to retest things you have already tested (like basic POST and GET).
 ## Models (Entities/Resources)
 
 [x] Studio
-[]Film
+[x]Film
 [x]Actor
 [x]Reviewer
 []Review

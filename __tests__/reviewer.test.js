@@ -30,5 +30,21 @@ describe('reviewer routes', () => {
       });
   });
 
+  it('updates a reviewer by id', async() => {
+    const reviewer = await getReviewer();
+
+    return request(app)
+      .patch(`/api/v1/reviewers/${reviewer._id}`)
+      .send({ name: 'Ebert Ernie', company: 'Oregon Movie Central' })
+      .then(res => {
+        expect(res.body).toEqual({
+          _id: expect.any(String),
+          name: 'Ebert Ernie',
+          company: 'Oregon Movie Central',
+          __v:0
+        });
+      });
+  });
+
 });
 
