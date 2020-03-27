@@ -23,10 +23,10 @@ don't need to retest things you have already tested (like basic POST and GET).
 
 ## Models (Entities/Resources)
 
-[] Studio
+[x] Studio
 []Film
-[]Actor
-[]Reviewer
+[x]Actor
+[x]Reviewer
 []Review
 
 ### Directions Key
