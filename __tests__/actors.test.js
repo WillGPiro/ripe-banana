@@ -16,7 +16,7 @@ describe('actor routes', () => {
         expect(res.body).toEqual({
           _id: expect.any(String),
           name: 'Guisseppi Garibaldi',
-          dob: '3-25-87',
+          dob: expect.any(String),
           pob: 'Rome, Italy',
           __v: 0
         });

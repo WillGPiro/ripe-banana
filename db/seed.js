@@ -6,7 +6,7 @@ const Film = require('../lib/models/Film');
 
 // specifying the number of things to create with our seed function
 
-module.exports = async({ studiosToCreate, actorToCreate, reviewerToCreate } = {}) => {
+module.exports = async({ studiosToCreate, actorToCreate, reviewerToCreate, filmToCreate } = {}) => {
   // creating  things
   // creating an array of things length
   // map through the array
@@ -40,7 +40,7 @@ module.exports = async({ studiosToCreate, actorToCreate, reviewerToCreate } = {}
       title: chance.animal({ type: 'ocean' } + 'IV'),
       studioId: chance.pickone(studio)._id,
       released: chance.pickone(year),
-      cast: [...Array(10)].map(() => ({ role: chance.name({ prefix: true }), actor: chance.pickone(actor) }))    
+      cast: [...Array(10)].map(() => ({ role: chance.name({ prefix: true }), actorId: chance.pickone(actor)._id }))    
     })));
 
 };
