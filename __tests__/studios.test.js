@@ -14,7 +14,7 @@ describe('studio routes', () => {
           city: 'Wenatchee',
           state: 'WA',
           country: 'United States'
-        }
+        },
       })
       .then(res => {
         expect(res.body).toEqual({
@@ -25,6 +25,7 @@ describe('studio routes', () => {
             state: 'WA',
             country: 'United States'
           },
+          id: expect.any(String),
           __v: 0
         });
       });
@@ -36,7 +37,8 @@ describe('studio routes', () => {
       .get(`/api/v1/studios/${studio._id}`)
       .then(res => {
         expect(res.body).toEqual({
-          ...studio
+          ...studio,
+          films: expect.any(Object)
         });
       }); 
   });
