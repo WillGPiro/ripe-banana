@@ -1,4 +1,4 @@
-const { getReviewer } = require('../db/data-helpers');
+const { getReviewer, getReviews } = require('../db/data-helpers');
 
 const request = require('supertest');
 const app = require('../lib/app');
@@ -22,12 +22,16 @@ describe('reviewer routes', () => {
       });
   });
 
-  it('gets an reviewer by id', async() => {
+  it('gets a reviewer by id', async() => {
     const reviewer = await getReviewer();
+    const reviews = await getReviews({ reviewer: reviewer._id });
     return request(app)
       .get(`/api/v1/reviewers/${reviewer._id}`)
       .then(res => {
-        expect(res.body).toEqual(reviewer);
+        expect(res.body).toEqual({
+          ...reviewer,
+          reviews
+        });
       });
   });
 
