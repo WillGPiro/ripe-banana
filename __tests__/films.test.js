@@ -53,7 +53,6 @@ describe('film routes', () => {
     return request(app)
       .get(`/api/v1/films/${film._id}`)
       .then(res => {
-        console.log('==============', res.body);
         expect(res.body).toEqual({
           ...film,
           reviews 
