@@ -43,7 +43,12 @@ describe('film routes', () => {
     return request(app)
       .get('/api/v1/films')
       .then(res => {
-        expect(res.body).toEqual(films);
+        films.forEach(film => {
+          delete film.__v;
+          delete film.cast;
+          console.log('===', res.body);
+          expect(res.body).toContainEqual(film);
+        });
       });
   });
 
