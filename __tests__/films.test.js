@@ -1,12 +1,15 @@
-const { getFilm, getFilms, getActor, getStudio } = require('../db/data-helpers');
-const mongoose = require('mongoose');
+const { 
+  getFilm, 
+  getFilms,  
+  getReviews 
+} = require('../db/data-helpers');
 
+const mongoose = require('mongoose');
 const request = require('supertest');
 const app = require('../lib/app');
 
 describe('film routes', () => {
   it('creates a film', async() => {
-    const cast = await getFilm();
     return request(app)
       .post('/api/v1/films')
       .send({
@@ -42,6 +45,20 @@ describe('film routes', () => {
       .then(res => {
         expect(res.body).toEqual(films);
       });
+  });
+
+  it('gets a film by id', async() => {
+    const film = await getFilm();
+    const reviews = await getReviews({ film: film._id });
+    return request(app)
+      .get(`/api/v1/films/${film._id}`)
+      .then(res => {
+        console.log('==============', res.body);
+        expect(res.body).toEqual({
+          ...film,
+          reviews 
+        });
+      }); 
   });
 
 });
