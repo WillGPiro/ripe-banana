@@ -1,7 +1,8 @@
 const { 
   getFilm, 
   getFilms,  
-  getReviews 
+  getReviews,
+  getStudios 
 } = require('../db/data-helpers');
 
 const mongoose = require('mongoose');
@@ -39,10 +40,11 @@ describe('film routes', () => {
 
   it('gets all films', async() => {
     const films = await getFilms();
-
+    // const studios = await getStudios({ films: films._id });
     return request(app)
       .get('/api/v1/films')
       .then(res => {
+        // studios;
         films.forEach(film => {
           delete film.__v;
           delete film.cast;
