@@ -33,7 +33,6 @@ describe('actor routes', () => {
           delete actor.__v;
           delete actor.dob;
           delete actor.pob;
-          console.log('===', res.body);
           expect(res.body).toContainEqual(actor);
         });
       });

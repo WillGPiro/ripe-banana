@@ -48,7 +48,6 @@ describe('film routes', () => {
         films.forEach(film => {
           delete film.__v;
           delete film.cast;
-          console.log('===', res.body);
           expect(res.body).toContainEqual(film);
         });
       });

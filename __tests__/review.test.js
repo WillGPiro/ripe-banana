@@ -12,7 +12,7 @@ describe('review routes', () => {
         rating: 4,
         reviewerId: new mongoose.Types.ObjectId(), 
         review: 'This film was an abomination!',
-        filmId: new mongoose.Types.ObjectId()
+        filmId: new mongoose.Types.ObjectId(),
       })
       .then(res => {
         expect(res.body).toEqual({
@@ -25,6 +25,39 @@ describe('review routes', () => {
         });
       });
   });
+  
+  it('gets the top 10 rated films', () => {
+    return request(app)
+      .get('/api/v1/reviews/')
+      .then(res => {
+        expect(res.body.length).toEqual(10);
+        expect(res.body).toEqual([
+          { _id: expect.any(String), rating: expect.any(Number), review: expect.any(String), filmId: expect.any(String), reviewerId: expect.any(String), __v: 0 },
+          { _id: expect.any(String), rating: expect.any(Number), review: expect.any(String), filmId: expect.any(String), reviewerId: expect.any(String), __v: 0 },
+          { _id: expect.any(String), rating: expect.any(Number), review: expect.any(String), filmId: expect.any(String), reviewerId: expect.any(String), __v: 0 },
+          { _id: expect.any(String), rating: expect.any(Number), review: expect.any(String), filmId: expect.any(String), reviewerId: expect.any(String), __v: 0 },
+          { _id: expect.any(String), rating: expect.any(Number), review: expect.any(String), filmId: expect.any(String), reviewerId: expect.any(String), __v: 0 },
+          { _id: expect.any(String), rating: expect.any(Number), review: expect.any(String), filmId: expect.any(String), reviewerId: expect.any(String), __v: 0 },
+          { _id: expect.any(String), rating: expect.any(Number), review: expect.any(String), filmId: expect.any(String), reviewerId: expect.any(String), __v: 0 },
+          { _id: expect.any(String), rating: expect.any(Number), review: expect.any(String), filmId: expect.any(String), reviewerId: expect.any(String), __v: 0 },
+          { _id: expect.any(String), rating: expect.any(Number), review: expect.any(String), filmId: expect.any(String), reviewerId: expect.any(String), __v: 0 },
+          { _id: expect.any(String), rating: expect.any(Number), review: expect.any(String), filmId: expect.any(String), reviewerId: expect.any(String), __v: 0 }
+        ]);
+      });
+  });
+
+  it('gets all reviews', async() => {
+    const reviews = await getReviews();
+
+    return request(app)
+      .get('/api/v1/reviews/')
+      .then(res => {
+        expect(res.body).toEqual(reviews);
+      });
+  });
+
+
+
 
 });
 
