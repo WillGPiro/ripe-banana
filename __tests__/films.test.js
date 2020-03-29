@@ -1,8 +1,7 @@
 const { 
   getFilm, 
   getFilms,  
-  getReviews,
-  getStudios 
+  getReviews 
 } = require('../db/data-helpers');
 
 const mongoose = require('mongoose');

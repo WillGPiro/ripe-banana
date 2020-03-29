@@ -105,13 +105,13 @@ While the schemas should look like the data definitions above, these are descrip
 ##### `GET /studios`
 
 ```
-[{ _id, name }]
+[x] [{ _id, name }]
 ```
 
 ##### `GET /studios/:id`
 
 ```
-{ _id, name, address, films: [{ _id, title }] }
+[x] { _id, name, address, films: [{ _id, title }] }
 ```
 
 ##### `GET /films`
@@ -135,7 +135,7 @@ While the schemas should look like the data definitions above, these are descrip
         role,
         actor: { _id, name }
     }],
-    reviews: [{
+    reviews: [{s
         id,
         rating,
         review,

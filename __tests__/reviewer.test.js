@@ -65,5 +65,29 @@ describe('reviewer routes', () => {
       });
   });
 
+  // it('throws error if trying to delete reviewer with active review', async() => {
+  //   const review = await getReviewer();
+  //   const reviewer = await getReviewer({ _id: review.reviewer });
+
+  //   return request(app)
+  //     .delete(`/api/v1/reviewers/${reviewer._id}`)
+  //     .then (res => {
+  //       expect(res.body).toEqual({ 
+  //         message: 'Reviewer cannot be deleted with active reviews',
+  //         status: 500 
+  //       });
+  //     });
+  // });
+
+  it('deletes a reviewer by Id', async() => {
+    const reviewer = await getReviewer();
+
+    return request(app)
+      .delete(`/api/v1/reviewers/${reviewer._id}`)
+      .then(res => {
+        expect(res.body).toEqual(reviewer);
+      });
+  });
+
 });
 
